@@ -1,0 +1,9 @@
+# k8s/broken/config-no-redis-port.yaml: Deliberately broken diagnostic example; remove after the exercise.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: shop-config
+data:
+  APP_ENV: "production"
+  LOG_LEVEL: "info"
+  REDIS_HOST: "redis"

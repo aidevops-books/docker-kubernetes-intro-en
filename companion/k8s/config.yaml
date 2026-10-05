@@ -1,0 +1,17 @@
+# k8s/config.yaml: Learning example; follow the corresponding chapter before applying.
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: intro-config
+data:
+  APP_ENV: "production"
+  LOG_LEVEL: "info"
+  REDIS_HOST: "intro-redis"
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: intro-secret
+type: Opaque
+stringData:
+  API_TOKEN: "change-me-in-real-life"

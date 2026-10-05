@@ -1,0 +1,26 @@
+# k8s/deployment-config.yaml: Learning example; follow the corresponding chapter before applying.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: intro-api
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: intro-api
+  template:
+    metadata:
+      labels:
+        app: intro-api
+    spec:
+      containers:
+        - name: api
+          image: intro-api:1.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 3000
+          envFrom:
+            - configMapRef:
+                name: intro-config
+            - secretRef:
+                name: intro-secret

@@ -1,0 +1,52 @@
+# k8s/redis.yaml: Learning example; follow the corresponding chapter before applying.
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: intro-redis-data
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: intro-redis
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: intro-redis
+  template:
+    metadata:
+      labels:
+        app: intro-redis
+    spec:
+      containers:
+        - name: redis
+          image: redis:7-alpine
+          args: ["--appendonly", "yes"]
+          ports:
+            - containerPort: 6379
+          volumeMounts:
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: intro-redis-data
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: intro-redis
+spec:
+  selector:
+    app: intro-redis
+  ports:
+    - port: 6379
+      targetPort: 6379

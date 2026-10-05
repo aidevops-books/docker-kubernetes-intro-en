@@ -1,0 +1,12 @@
+# k8s/service.yaml: Learning example; follow the corresponding chapter before applying.
+apiVersion: v1
+kind: Service
+metadata:
+  name: intro-api
+spec:
+  type: ClusterIP
+  selector:
+    app: intro-api
+  ports:
+    - port: 80
+      targetPort: 3000

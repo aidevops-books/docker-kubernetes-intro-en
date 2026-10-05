@@ -1,0 +1,13 @@
+{
+  "name": "intro-api",
+  "version": "1.0.0",
+  "description": "Mini CloudShop API for Docker & Kubernetes: A Practical Introduction",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "redis": "^4.7.0"
+  }
+}

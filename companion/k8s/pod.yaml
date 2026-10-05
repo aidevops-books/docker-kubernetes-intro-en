@@ -1,0 +1,14 @@
+# k8s/pod.yaml: Learning example; follow the corresponding chapter before applying.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: intro-api-pod
+  labels:
+    app: intro-api
+spec:
+  containers:
+    - name: api
+      image: intro-api:1.0
+      imagePullPolicy: IfNotPresent
+      ports:
+        - containerPort: 3000

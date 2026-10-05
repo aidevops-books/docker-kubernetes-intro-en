@@ -1,0 +1,16 @@
+# k8s/emptydir-pod.yaml: Learning example; follow the corresponding chapter before applying.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cache-demo
+spec:
+  containers:
+    - name: app
+      image: busybox:1.36
+      command: ["sh", "-c", "trap 'exit 1' TERM; while true; do sleep 1; done"]
+      volumeMounts:
+        - name: cache
+          mountPath: /cache
+  volumes:
+    - name: cache
+      emptyDir: {}

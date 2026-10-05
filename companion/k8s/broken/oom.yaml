@@ -1,0 +1,14 @@
+# k8s/broken/oom.yaml: Deliberately broken diagnostic example; remove after the exercise.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: memory-hog
+spec:
+  containers:
+    - name: app
+      image: intro-api:1.0
+      imagePullPolicy: IfNotPresent
+      command: ["node", "-e", "const a=[];while(true){a.push(Buffer.alloc(8*1024*1024,1))}"]
+      resources:
+        limits:
+          memory: 64Mi

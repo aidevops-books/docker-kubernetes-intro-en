@@ -1,0 +1,25 @@
+# swarm/lab-nodes.yaml: Learning example; follow the corresponding chapter before applying.
+name: swarm-lab
+services:
+  registry:
+    image: registry:3
+  manager1: &node
+    image: docker:29-dind
+    privileged: true
+    hostname: manager1
+    container_name: manager1
+    command: ["--insecure-registry=registry:5000"]
+    environment:
+      DOCKER_TLS_CERTDIR: ""
+    ports:
+      - "8090:8080"
+  worker1:
+    <<: *node
+    hostname: worker1
+    container_name: worker1
+    ports: []
+  worker2:
+    <<: *node
+    hostname: worker2
+    container_name: worker2
+    ports: []
